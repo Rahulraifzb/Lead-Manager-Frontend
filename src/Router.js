@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Alerts from "./components/layout/Alerts";
 import ProtectedRoute from "./utility/PrivateRoute";
 
 const Login = React.lazy(() => import("./views/Login"))
@@ -11,8 +12,9 @@ const AppRouter = () => {
   return (
     <Suspense fallback={<span>Loading...</span>}>
       <Router>
+      <Alerts />
         <Switch>
-          <Route path="/" component={Leads} exact />
+          <ProtectedRoute path="/" component={Leads} exact />
           <ProtectedRoute path="/login" component={Login} />
           <ProtectedRoute path="/register" component={Register} />
           <Route path="*" component={Error} />
